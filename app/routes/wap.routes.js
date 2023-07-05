@@ -1,5 +1,5 @@
 module.exports = app => {
-    const wap = require('../app/controller/wap.controller.js');
+    const wap = require('../controller/wap.controller.js');
 
     var router = require('express').Router();
 
@@ -12,4 +12,6 @@ module.exports = app => {
     router.put('/:id', wap.update);
 
     router.delete('/essid/:essid', wap.deleteByEssid);
+
+    app.use('/api/wap', router);
 }

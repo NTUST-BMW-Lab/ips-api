@@ -1,12 +1,13 @@
-const db = require("../models");
-const Wap = db.wap;
+const Wap = require('../models/wap');
 
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   if (!req.body.essid) {
     res.status(400).send({ message: 'Essid cannot be empty!'})
     return;
   }
+
+  console.log(req.body);
 
   const wap = new Wap({
     essid: req.body.essid,
@@ -14,16 +15,16 @@ exports.create = (req, res) => {
     rssi: req.body.rssi
   });
 
-  wap
-    .save(wap)
+  await wap
+    .save()
     .then(data => {
-        res.send(data);
+      res.send(data);
     })
     .catch(err => {
-        res.status(500).send({
-            message: err.message || 'Some Error Occured while creating the Schema'
-        })
-    })
+      res.status(500).send({
+        message: err.message || 'Some Error Occurred while creating the Schema'
+      });
+  });
 };
 
 // Retrieve all Tutorials from the database.

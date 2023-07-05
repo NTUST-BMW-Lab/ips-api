@@ -1,20 +1,20 @@
-module.exports = mongoose => {
-    var schema = mongoose.Schema(
-        {
-            essid: String,
-            bssid: String,
-            rssi: Number,
-            timestamp: { type: Date, default: Date.now() }
-        },
-        { timestamps: true }
-    );
+const mongoose = require('mongoose');
 
-    schema.method('toJSON', function() {
-        const { __v, _id, ...object } = this.toObject();
-        object.id = _id;
-        return object;
-    });
+const wapSchema = new mongoose.Schema({
+  essid: {
+    type: String,
+    required: true
+  },
+  bssid: {
+    type: String,
+    required: true
+  },
+  rssi: {
+    type: Number,
+    required: true
+  }
+});
 
-    const Wap = mongoose.model('wap', schema)
-    return Wap;
-}
+const Wap = mongoose.model('Wap', wapSchema);
+
+module.exports = Wap;

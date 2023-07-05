@@ -1,4 +1,5 @@
 require('dotenv')
+const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 
@@ -11,6 +12,8 @@ var corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 const db = require('./app/models');
 db.mongoose.connect(
@@ -25,6 +28,11 @@ db.mongoose.connect(
     });
 
 const PORT = process.env.PORT || 8080;
+
+// add route 
+require('./app/routes/wap.routes')(app);
+
+
 app.listen(PORT, () => {
     console.log('Server is running on port 8080')
 });
