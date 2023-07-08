@@ -31,6 +31,7 @@ const PORT = process.env.PORT || 8080;
 
 // add route 
 require('./app/routes/wap.routes')(app);
+require('./app/routes/user.routes')(app);
 
 
 app.listen(PORT, () => {
