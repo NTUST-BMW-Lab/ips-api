@@ -1,18 +1,17 @@
-module.exports = (app) => {
-  const wap = require("../controller/wap.controller.js");
+const express = require("express");
 
-  var router = require("express").Router();
-  const { verifyToken } = require("../middleware");
+const wap = require("../controller/wap.controller.js");
+const verifyToken = require("../middleware/authMiddleware");
+const router = express.Router();
 
-  router.post("/", verifyToken, wap.create);
+router.post("/create", wap.create);
 
-  router.get("/", verifyToken, wap.findAll);
+router.get("/", verifyToken, wap.findAll);
 
-  router.get("/essid/:essid", verifyToken, wap.findByEssid);
+router.get("/essid/:essid", verifyToken, wap.findByEssid);
 
-  router.put("/:id", verifyToken, wap.update);
+router.put("/:id", verifyToken, wap.update);
 
-  router.delete("/essid/:essid", verifyToken, wap.deleteByEssid);
+router.delete("/essid/:essid", verifyToken, wap.deleteByEssid);
 
-  app.use("/api/wap", router);
-};
+module.exports = router;

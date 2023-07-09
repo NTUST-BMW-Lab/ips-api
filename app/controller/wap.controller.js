@@ -1,7 +1,7 @@
 const Wap = require("../models/wap");
 
 // Create and Save a new Tutorial
-exports.create = async (req, res) => {
+const create = async (req, res) => {
   if (!req.body.essid) {
     res.status(400).send({ message: "Essid cannot be empty!" });
     return;
@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all Tutorials from the database.
-exports.findAll = async (req, res) => {
+const findAll = async (req, res) => {
   try {
     const waps = await Wap.find();
     res.json(waps);
@@ -38,11 +38,11 @@ exports.findAll = async (req, res) => {
 };
 
 // Find a single Tutorial with an id
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
   const id = req.params.id;
 };
 
-exports.findByEssid = async (req, res) => {
+const findByEssid = async (req, res) => {
   try {
     const essid = req.params.id;
     const waps = await Wap.find({ essid });
@@ -53,18 +53,15 @@ exports.findByEssid = async (req, res) => {
     }
     res.json(waps);
   } catch (err) {
-    res
-      .status(500)
-      .send({
-        message:
-          err.message ||
-          "Some error occured while attempting to fetch by ESSID",
-      });
+    res.status(500).send({
+      message:
+        err.message || "Some error occured while attempting to fetch by ESSID",
+    });
   }
 };
 
 // Update a Tutorial by the id in the request
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   try {
     const { essid, bssid, rssi } = req.body;
     const wap = await Wap.findByIdAndUpdate(
@@ -84,7 +81,7 @@ exports.update = async (req, res) => {
 };
 
 // Delete a Tutorial with the specified id in the request
-exports.deleteByEssid = async (req, res) => {
+const deleteByEssid = async (req, res) => {
   try {
     const essid = req.params.essid;
     const wap = await Wap.deleteMany({ essid });
@@ -95,7 +92,18 @@ exports.deleteByEssid = async (req, res) => {
 };
 
 // Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {};
+const deleteAll = (req, res) => {};
 
 // Find all published Tutorials
-exports.findAllPublished = (req, res) => {};
+const findAllPublished = (req, res) => {};
+
+module.exports = {
+  create,
+  findAll,
+  findOne,
+  findByEssid,
+  update,
+  deleteByEssid,
+  deleteAll,
+  findAllPublished,
+};

@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -34,7 +34,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.register = async (req, res) => {
+const register = async (req, res) => {
   const { username, email, type, password } = req.body;
 
   try {
@@ -67,4 +67,10 @@ exports.register = async (req, res) => {
     console.error("Registration error:", error);
     res.status(500).json({ message: "An error occurred during registration" });
   }
+};
+
+
+module.exports = {
+  login,
+  register,
 };
