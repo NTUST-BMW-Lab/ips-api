@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 // add route
 app.use("/api/user", userrouters);
-// app.use("/api/waps", waprouters);
+app.use("/api/waps", waprouters);
 
 const db = require("./app/models");
 db.mongoose

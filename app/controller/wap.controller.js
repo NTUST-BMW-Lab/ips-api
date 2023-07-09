@@ -1,6 +1,5 @@
 const Wap = require("../models/wap");
 
-// Create and Save a new Tutorial
 const create = async (req, res) => {
   if (!req.body.essid) {
     res.status(400).send({ message: "Essid cannot be empty!" });
@@ -60,7 +59,6 @@ const findByEssid = async (req, res) => {
   }
 };
 
-// Update a Tutorial by the id in the request
 const update = async (req, res) => {
   try {
     const { essid, bssid, rssi } = req.body;
@@ -91,11 +89,16 @@ const deleteByEssid = async (req, res) => {
   }
 };
 
-// Delete all Tutorials from the database.
-const deleteAll = (req, res) => {};
-
-// Find all published Tutorials
-const findAllPublished = (req, res) => {};
+const deleteAll = async (req, res) => {
+  try {
+    await Wap.deleteMany({});
+    res.status(200).json({ message: "All WAP documents have been deleted." });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while deleting WAP documents." });
+  }
+};
 
 module.exports = {
   create,
@@ -105,5 +108,4 @@ module.exports = {
   update,
   deleteByEssid,
   deleteAll,
-  findAllPublished,
 };
