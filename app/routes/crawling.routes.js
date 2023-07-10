@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const crawlingController = require("../controllers/crawlingController");
+const crawlingController = require("../controller/crawling.controller.js");
 
 // Create a new crawling data
 router.post("/", crawlingController.createCrawling);
