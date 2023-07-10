@@ -43,7 +43,7 @@ const findOne = (req, res) => {
 
 const findByEssid = async (req, res) => {
   try {
-    const essid = req.params.id;
+    const essid = req.params.essid;
     const waps = await Wap.find({ essid });
     if (!waps) {
       return res
