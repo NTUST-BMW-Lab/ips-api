@@ -4,7 +4,7 @@ const wap = require("../controller/wap.controller.js");
 const verifyToken = require("../middleware/authMiddleware");
 const router = express.Router();
 
-router.post("/create", wap.create);
+router.post("/create", verifyToken, wap.create);
 
 router.get("/", verifyToken, wap.findAll);
 
