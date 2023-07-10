@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const waprouters = require("./app/routes/wap.routes");
 const userrouters = require("./app/routes/user.routes");
+const handsetrouters = require("./app/routes/handset.routes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 // add route
 app.use("/api/user", userrouters);
 app.use("/api/waps", waprouters);
+app.use("/api/handsets", handsetrouters);
 
 const db = require("./app/models");
 db.mongoose
