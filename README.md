@@ -64,4 +64,4 @@ Description harus bisa mendeskripsikan apa yang dikerjakan. Jika ada beberapa ha
 
 
 ## API Documentation
-[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://documenter.getpostman.com/view/24268801/2s93zH2epF)
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://documenter.getpostman.com/view/24268801/2s946bBENC)
