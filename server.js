@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const waprouters = require("./app/routes/wap.routes");
 const userrouters = require("./app/routes/user.routes");
+const buildings = require("./app/routes/buildings.routes.js")
+const aps = require("./app/routes/accesspoints.routes.js")
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use(bodyParser.json());
 // add route
 app.use("/api/user", userrouters);
 app.use("/api/waps", waprouters);
+app.use('/api/', buildings)
+app.use('/api/', aps)
 
 const db = require("./app/models");
 db.mongoose
