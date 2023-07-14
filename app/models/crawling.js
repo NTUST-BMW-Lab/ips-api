@@ -1,32 +1,36 @@
 const mongoose = require("mongoose");
 
-const crawlingSchema = new mongoose.Schema({
-  accessPoint: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Access_Point",
-    required: true,
-  },
-  handset: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Handset",
-    required: true,
-  },
-  rssi: {
-    type: Number,
-    required: true,
-  },
-  coordinate: {
-    x: {
-      type: Number,
-      required: true,
+const schema = new mongoose.Schema({
+    access_point: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "AccessPoint",
+        required: true,
     },
-    y: {
-      type: Number,
-      required: true,
+    handset: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Handset",
+        required: true,
     },
-  },
+    latitude: {
+        type: Number,
+        required: true
+    },
+    longitude: {
+        type: Number,
+        required: true
+    },
+    data: [{
+        rssi: {
+            type: Number,
+            required: true,
+        },
+        time_string: {
+            type: String,
+            required: true
+        }
+    }]
 });
 
-const Crawling = mongoose.model("Crawling", crawlingSchema);
+const Crawling= mongoose.model("Crawling", schema);
 
 module.exports = Crawling;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const access_points = new mongoose.Schema({
+const schema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
@@ -17,13 +17,16 @@ const access_points = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    building: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Building',
-        required: true,
+    latitude: {
+        type: Number,
+        required: true
+    },
+    longitude: {
+        type: Number,
+        required: true
     }
 });
 
-const access_point = mongoose.model('Access_Point', access_points)
+const AccessPoint = mongoose.model('AccessPoint', schema)
 
-module.exports = access_point;
+module.exports = AccessPoint;

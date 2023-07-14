@@ -1,8 +1,8 @@
-const AccessPoint = require('../models/accesspoints')
+const Model = require('../models/access-point')
 
-const createAccessPoint = async (req, res) => {
+const store = async (req, res) => {
     try {
-        const ap = await AccessPoint.create(req.body)
+        const ap = await Model.create(req.body)
         res.status(201).json(ap)
     } catch (err) {
         //console.log(err)
@@ -12,9 +12,9 @@ const createAccessPoint = async (req, res) => {
     }
 }
 
-const getAllAPs = async (req, res) => {
+const index = async (req, res) => {
     try {
-        const aps = await AccessPoint.find()
+        const aps = await Model.find()
         res.status(200).json(aps)
     } catch (err) {
         res.status(500).json({
@@ -23,14 +23,14 @@ const getAllAPs = async (req, res) => {
     }
 }
 
-const getAPById = async (req, res) => {
+const show = async (req, res) => {
     try {
-        const ap = await AccessPoint.findById(req.params.id);
+        const ap = await Model.findById(req.params.id);
         if (!ap) {
             return res.status(404).json({
                 error: 'AP not found!'
             })
-        } 
+        }
         res.status(200).json(ap)
     } catch (err) {
         res.status(500).json({
@@ -39,7 +39,7 @@ const getAPById = async (req, res) => {
     }
 }
 
-const updateAP = async (req, res) => {
+const update = async (req, res) => {
     try {
         const id = req.query.id
 
@@ -49,10 +49,10 @@ const updateAP = async (req, res) => {
             })
         }
 
-        const ap = await AccessPoint.findByIdAndUpdate(
+        const ap = await Model.findByIdAndUpdate(
             id,
             req.body,
-            { new: true }
+            {new: true}
         )
 
         if (!ap) {
@@ -62,13 +62,13 @@ const updateAP = async (req, res) => {
         }
         res.status(200).json(ap)
     } catch (err) {
-        res.status(500).json( {
+        res.status(500).json({
             error: 'Failed to update AP.'
         })
     }
 }
 
-const deleteAP = async (req, res) => {
+const destroy = async (req, res) => {
     try {
         const id = req.query.id
 
@@ -78,7 +78,7 @@ const deleteAP = async (req, res) => {
             })
         }
 
-        const ap = await AccessPoint.findByIdAndDelete(id)
+        const ap = await Model.findByIdAndDelete(id)
         if (!ap) {
             return res.status(404).json({
                 error: 'AP not found!'
@@ -94,9 +94,9 @@ const deleteAP = async (req, res) => {
 }
 
 module.exports = {
-    createAccessPoint,
-    getAllAPs,
-    getAPById,
-    updateAP,
-    deleteAP
+    store,
+    index,
+    show,
+    update,
+    destroy
 }

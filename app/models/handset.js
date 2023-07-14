@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
-const handsetSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    required: true,
-  },
-  macAddress: {
-    type: String,
-    required: true,
-  },
+const schema = new mongoose.Schema({
+    type: {
+        type: String,
+        required: true,
+    },
+    os: {
+        type: String,
+        required: true,
+    },
 });
 
-const Handset = mongoose.model("Handset", handsetSchema);
+const Handset = mongoose.model("Handset", schema);
 
 module.exports = Handset;

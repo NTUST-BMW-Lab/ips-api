@@ -1,9 +1,9 @@
-const Building = require('../models/buildings')
+const Model = require('../models/Building')
 
-const createBuilding = async (req, res) => {
+const store = async (req, res) => {
     try {
-        const building = await Building.create(req.body)
-        res.status(201).json(building)
+        const data = await Model.create(req.body)
+        res.status(201).json(data)
     } catch (err) {
         res.status(500).json({
             error: 'Failed to create Building.'
@@ -11,15 +11,15 @@ const createBuilding = async (req, res) => {
     }
 }
 
-const getAllBuildings = async (req, res) => {
+const index = async (req, res) => {
     try {
-        const buildings = await Building.find()
-        if (!buildings) {
+        const data = await Model.find()
+        if (!data) {
             res.status(404).json({
                 error: 'No Buildings entry found!'
             })
         }
-        res.status(200).json(buildings)
+        res.status(200).json(data)
     } catch (err) {
         res.status(500).json({
             error: 'Failed to fetch Buildings.'
@@ -27,15 +27,15 @@ const getAllBuildings = async (req, res) => {
     }
 }
 
-const getBuildingById = async (req, res) => {
+const show = async (req, res) => {
     try {
-        const building = await Building.findById(req.params.id);
-        if (!building) {
+        const data = await Model.findById(req.params.id);
+        if (!data) {
             return res.status(404).json({
                 error: 'Building not found!'
             })
-        } 
-        res.status(200).json(building)
+        }
+        res.status(200).json(data)
     } catch (err) {
         res.status(500).json({
             error: 'Failed to fetch Building.'
@@ -43,7 +43,7 @@ const getBuildingById = async (req, res) => {
     }
 }
 
-const updateBuilding = async (req, res) => {
+const update = async (req, res) => {
     try {
         const id = req.query.id
 
@@ -53,36 +53,35 @@ const updateBuilding = async (req, res) => {
             })
         }
 
-        const building = await Building.findByIdAndUpdate(
+        const data = await Model.findByIdAndUpdate(
             id,
             req.body,
-            { new: true }
+            {new: true}
         )
-        if (!building) {
+        if (!data) {
             return res.status(404).json({
                 error: 'Building not found!'
             })
         }
-        res.status(200).json(building)
+        res.status(200).json(data)
     } catch (err) {
-        res.status(500).json( {
+        res.status(500).json({
             error: 'Failed to update Building.'
         })
     }
 }
 
-const deleteBuilding = async (req, res) => {
+const destroy = async (req, res) => {
     try {
         const id = req.query.id
-        console.log(id)
         if (!id) {
             return res.status(400).json({
                 error: 'Missing id parameter'
             })
         }
-        
-        const building = await Building.findByIdAndDelete(id)
-        if (!building) {
+
+        const data = await Model.findByIdAndDelete(id)
+        if (!data) {
             return res.status(404).json({
                 error: 'Building not found!'
             })
@@ -97,9 +96,9 @@ const deleteBuilding = async (req, res) => {
 }
 
 module.exports = {
-    createBuilding,
-    getAllBuildings,
-    getBuildingById,
-    updateBuilding,
-    deleteBuilding
+    store,
+    index,
+    show,
+    update,
+    destroy
 }
