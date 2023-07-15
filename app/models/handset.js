@@ -11,6 +11,6 @@ const schema = new mongoose.Schema({
     },
 });
 
-const Handset = mongoose.model("Handset", schema);
+const Handset = mongoose.models.Handset || mongoose.model("Handset", schema);
 
 module.exports = Handset;

@@ -33,12 +33,12 @@ app.use('/api/buildings', routes.building)
 
 mongoose.Promise = global.Promise;
 mongoose
-    .connect(process.env.URL, {
+    .connect(process.env.URL + process.env.DB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
     .then(() => {
-        console.log("Successfully connected to database!");
+        console.log(`Successfully connected to ${process.env.DB} database!`);
     })
     .catch((err) => {
         console.log("Failed to connect to database!", err);

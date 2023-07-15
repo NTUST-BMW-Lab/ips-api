@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
     type: {
-        type: String,
-        required: true,
+        type: String
     },
     bssid: {
         type: String,
@@ -14,19 +13,16 @@ const schema = new mongoose.Schema({
         required: true,
     },
     floor: {
-        type: Number,
-        required: true,
+        type: Number
     },
     latitude: {
-        type: Number,
-        required: true
+        type: Number
     },
     longitude: {
-        type: Number,
-        required: true
+        type: Number
     }
 });
 
-const AccessPoint = mongoose.model('AccessPoint', schema)
+const AccessPoint = mongoose.models.AccessPoint || mongoose.model('AccessPoint', schema)
 
 module.exports = AccessPoint;

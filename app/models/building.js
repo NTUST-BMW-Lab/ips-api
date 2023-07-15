@@ -13,6 +13,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-const Building = mongoose.model('Building', schema);
+const Building= mongoose.models.Building || mongoose.model('Building', schema);
 
 module.exports = Building;
