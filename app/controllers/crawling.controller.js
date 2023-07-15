@@ -1,24 +1,24 @@
 const Model = require("../models/crawling");
 const Handset = require('../models/handset');
 const Building = require('../models/building');
-const AccessPoint = require('../models/access-point')
 
 async function store(req, res) {
     try {
         // Check building data existence
-        let building = await Building.find(req.body.building)
+        let building = await Building.findOne(req.body.building)
         if (!building) building = await Building.create(req.body.building)
         req.body.building = building
+        building = await Building.findOne(building)
 
         // Check handset data existence
         let handset = await Handset.findOne(req.body.handset)
         if (!handset) handset = await Handset.create(req.body.handset)
         req.body.handset = handset
 
-        const crawling = await Model.create(req.body);
-        res.status(201).json(crawling);
+        await Model.create(req.body);
+
+        res.status(201).json(`Successfully stored ${req.body.access_points.length} crawling data from ${building.name}`);
     } catch (error) {
-        console.error(error)
         res.status(500).json({error: "Failed to create crawling data"});
     }
 }
